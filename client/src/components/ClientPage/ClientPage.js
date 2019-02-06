@@ -1,18 +1,14 @@
 import React from 'react';
-// import ClientForm from './ClientForm';
+// import ClientNote from '../Note/ClientNote';
+// import ClientTodo from '../Todo/ClientTodo';
+import SearchForm from '../ClientPage/SearchForm'
+import DetailView from '../ClientPage/DetailView'
 import '../../index.css';
-import { Row, Col, Input, Button, Collection, CollectionItem, Tab, Tabs, Icon } from 'react-materialize'
+import { Collection, CollectionItem, } from 'react-materialize'
 import $ from 'axios'
 
 
-const SearchForm = (props) => (
-    <form className="form">
-        <Row>
-           <Col s={9}><Input className="input" value={props.searchVal} onChange={props.searchChange} placeholder="Search Clients Here" /></Col> 
-            <Col s={3}><Button className="searchButton" onClick={props.selectClients}>SEARCH</Button></Col>
-        </Row>
-    </form>
-);
+
 
 const DirectoryView = (props) => (
     <div className="directory-view">
@@ -27,27 +23,7 @@ const ClientCollection = (props) => (
     <CollectionItem onClick={() => props.clickHandler(props.id)}>{props.name}</CollectionItem>
 );
 
-const DetailView = (props) => (
-    <div className="detail-view">
-        <Tabs className='tab-demo z-depth-1'>
-            <Tab title="Profile" active>
-                <p>Name: {props.details.name}</p>
-                <p>Phone: {props.details.phone}</p>
-                <p>Email: {props.details.email}</p>
-                <p>address: {props.details.address}</p>
-                <p>Social Handle: {props.details.social}</p>
-                <div>
-                    <Button waves="orange">Edit<Icon left>edit</Icon></Button>
-                    <Button onClick={() => props.deleteClient(props.details._id)} waves="red">Delete<Icon right>delete</Icon></Button>
-                </div>
-            </Tab>
-            <Tab title="To Do List" >Todo List Component Goes Here</Tab>
-            <Tab title="Notes">Notes Component Goes Here</Tab>
 
-        </Tabs>
-
-    </div>
-);
 
 class ClientPage extends React.Component {
 
@@ -56,14 +32,25 @@ class ClientPage extends React.Component {
         clientList: [],
         searchVal: '',
         selectedClients: [],
-        clientDetail: {}
+        clientDetail: {},
+        note: '',
+        todo: '',
+
     };
 
+
+    noteChange = event => {
+        this.setState({ note: event.target.value });
+    }
+
+    todoChange = event => {
+        this.setState({ todo: event.target.value });
+    }
 
     searchChange = event => {
         this.setState({ searchVal: event.target.value });
     }
-    
+
     selectClients = (e) => {
         e.preventDefault();
         const clientFilter = this.state.clientList.filter(client => client.name.includes(this.state.searchVal));
@@ -86,16 +73,16 @@ class ClientPage extends React.Component {
 
     deleteClient = (id) => {
         console.log(id);
-        // console.log($);
-        $.delete( `/api/client/${id}`)
-         
-        .then(() => {
-            console.log('client deleted');
-            this.getClients();
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+
+        $.delete(`/api/client/${id}`)
+
+            .then(() => {
+                console.log('client deleted');
+                this.getClients();
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     componentDidMount() {
@@ -115,7 +102,14 @@ class ClientPage extends React.Component {
 
                 <DetailView
                     details={this.state.clientDetail}
+                    todo={this.state.todo}
+                    note={this.state.note}
                     deleteClient={this.deleteClient}
+                    todoChange={this.todoChange}
+                    noteChange={this.noteChange}
+                    
+                    
+
 
                 />
             </div>

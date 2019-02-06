@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
@@ -11,17 +11,17 @@ const ClientSchema = new Schema({
         address: String,
         social: String,
 
-    //     todo: {
-    //         task: String,
-    //         completed: Boolean,
-    //         date: String
-    //     },
+        // todo: {
+        //     task: String,
+        //     completed: Boolean,
+        //     date: String
+        // },
 
-    //     notes: {
-    //         content: String,
-    //         date: Date
+        // notes: {
+        //     content: String,
+        //     date: Date
 
-    //     }
+        // },
     // }
 }
 );

@@ -69,9 +69,9 @@ class App extends React.Component {
       })
   }
 
-  componentDidMount() {
-    this.getClients();
-  }
+    // componentDidMount() {
+    //   this.getClients();
+    // }
 
   render() {
     return (
