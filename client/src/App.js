@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Navbar, NavItem } from 'react-materialize';
-import HomePage from './components/HomePage/HomePage'
+// import HomePage from './components/HomePage/HomePage'
 import ClientPage from './components/ClientPage/ClientPage'
 import ClientForm from './components/ClientPage/ClientForm'
 import $ from 'axios'
@@ -79,8 +79,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Navbar brand='Client Manager' right>
-              <NavItem><Link to={`/`}>Home</Link></NavItem>
-              <NavItem><Link to={`/clients`}>Clients</Link></NavItem>
+              {/* <NavItem><Link to={`/`}>Home</Link></NavItem> */}
+              <NavItem><Link to={`/`}>Clients</Link></NavItem>
               <NavItem><ClientForm
                 name={this.state.name}
                 phone={this.state.phone}
@@ -94,8 +94,8 @@ class App extends React.Component {
                 socialChange={this.socialChange}
                 handleAdd={this.handleAdd} /></NavItem>
             </Navbar>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/clients' component={ () => <ClientPage
+            {/* <Route exact path='/' component={HomePage} /> */}
+            <Route exact path='/' component={ () => <ClientPage
 
               clientList={this.state.clientList} />} />
 
