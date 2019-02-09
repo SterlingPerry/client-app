@@ -15,8 +15,8 @@ const DetailView = (props) => (
                 <p>address: {props.details.address}</p>
                 <p>Social Handle: {props.details.social}</p>
                 <div>
-                    <Button waves="orange">Edit</Button>
-                    <Button onClick={() => props.deleteClient(props.details._id)} waves="red"></Button>
+                    <Button waves="orange"><Icon>edit</Icon></Button>
+                    <Button onClick={() => props.deleteClient(props.details._id)} waves="red"><Icon>delete</Icon></Button>
                 </div>
             </Tab>
 
